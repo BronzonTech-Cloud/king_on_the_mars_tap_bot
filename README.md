@@ -4,7 +4,7 @@ A tap-to-earn Telegram bot integrated with the TON blockchain.
 
 ## Project Description
 
-KingOnTheMars Tap Bot is a Telegram bot that allows users to earn TON tokens by tapping. Users can set their TON wallet address and earn tokens based on their tapping activity. The bot periodically distributes rewards to the users' TON addresses.
+KingOnTheMars Tap Bot is a Telegram bot that allows users to earn TON tokens by tapping. Users can set their TON wallet address and earn tokens based on their tapping activity. The bot implements a daily reward system with increasing reward amounts that reset every 30 days.
 
 ## Installation
 
@@ -42,7 +42,13 @@ KingOnTheMars Tap Bot is a Telegram bot that allows users to earn TON tokens by 
     ```
 
 7. Schedule the reward distribution:
-    - Create a cron job to run `reward_scheduler.py` at regular intervals.
+    - Create a cron job to run `reward_scheduler.py` at regular intervals (if needed).
+
+## Features
+
+- **Tap-to-Earn:** Users can earn tokens by tapping commands.
+- **Daily Rewards:** Users can claim daily rewards that increase by 1000 tokens each day, resetting after 30 days.
+- **TON Wallet Integration:** Users can connect their TON wallet address to receive rewards.
 
 ## Contributing
 
