@@ -2,7 +2,7 @@
 
 A tap-to-earn Telegram bot integrated with the TON blockchain.
 
-![alt text](https://freeimage.host/i/dR2FULG)
+![kingonthemars](https://github.com/user-attachments/assets/d727fed1-a0fb-4b40-b3f2-ccc182aa3237)
 
 
 ## Project Description
