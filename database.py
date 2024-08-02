@@ -11,7 +11,8 @@ def create_db():
             user_id INTEGER UNIQUE,
             taps INTEGER DEFAULT 0,
             address TEXT,
-            last_claimed TEXT
+            last_claimed TEXT,
+            reward_cycle_start TEXT
         )
     ''')
     conn.commit()
@@ -23,7 +24,7 @@ def get_user(user_id):
     cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
     user = cursor.fetchone()
     conn.close()
-    return {'user_id': user[1], 'taps': user[2], 'address': user[3], 'last_claimed': user[4]}
+    return {'user_id': user[1], 'taps': user[2], 'address': user[3], 'last_claimed': user[4], 'reward_cycle_start': user[5]}
 
 def update_taps(user_id):
     conn = sqlite3.connect(DB_NAME)
@@ -43,5 +44,12 @@ def set_last_claimed(user_id, timestamp):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     cursor.execute('UPDATE users SET last_claimed = ? WHERE user_id = ?', (timestamp, user_id))
+    conn.commit()
+    conn.close()
+
+def set_reward_cycle(user_id, timestamp):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('UPDATE users SET reward_cycle_start = ? WHERE user_id = ?', (timestamp, user_id))
     conn.commit()
     conn.close()
