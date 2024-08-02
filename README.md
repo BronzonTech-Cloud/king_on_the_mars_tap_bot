@@ -60,3 +60,7 @@ Contributions are welcome! Please create an issue or submit a pull request for a
 ## License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE. See the [LICENSE](LICENSE) file for details.
+
+## Donation
+
+![donation](https://github.com/user-attachments/assets/78340764-d1bf-4934-b08c-6e9b5cea0ac0)
