@@ -2,6 +2,9 @@
 
 A tap-to-earn Telegram bot integrated with the TON blockchain.
 
+![alt text](https://github.com/BronzonTech-Cloud/assets/kingonthemars.png?raw=true)
+
+
 ## Project Description
 
 KingOnTheMars Tap Bot is a Telegram bot that allows users to earn TON tokens by tapping. Users can set their TON wallet address and earn tokens based on their tapping activity. The bot implements a daily reward system with increasing reward amounts that reset every 30 days.
