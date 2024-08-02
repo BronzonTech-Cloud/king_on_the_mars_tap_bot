@@ -1,7 +1,7 @@
 import sqlite3
 from ton import send_ton_tokens
 
-DB_NAME = 'users.db'
+DB_NAME = 'users.db' 
 
 def reward_users():
     conn = sqlite3.connect(DB_NAME)
