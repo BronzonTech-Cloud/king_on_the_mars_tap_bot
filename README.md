@@ -10,7 +10,7 @@ KingOnTheMars Tap Bot is a Telegram bot that allows users to earn TON tokens by 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/king_on_the_mars_tap_bot.git
+    git clone https://github.com/BronzonTech-Cloud/king_on_the_mars_tap_bot.git
     cd king_on_the_mars_tap_bot
     ```
 
