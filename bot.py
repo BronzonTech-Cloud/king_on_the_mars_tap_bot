@@ -1,13 +1,14 @@
 import sqlite3
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from database import create_db, get_user, update_taps, set_user_address, set_last_claimed
+from database import create_db, get_user, update_taps, set_user_address, set_last_claimed, set_reward_cycle
 from ton import is_valid_ton_address, send_ton_tokens
 from datetime import datetime, timedelta
 
 TELEGRAM_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
 
-# Daily reward amount
-DAILY_REWARD_AMOUNT = 10
+# Daily reward increment and reset period
+DAILY_REWARD_INCREMENT = 1000
+REWARD_RESET_DAYS = 30
 
 def start(update, context):
     user_id = update.message.from_user.id
@@ -54,9 +55,23 @@ def reward(update, context):
         update.message.reply_text('You have already claimed your daily reward today. Please try again tomorrow.')
         return
 
-    send_ton_tokens(user['address'], DAILY_REWARD_AMOUNT)
+    reward_cycle_start = user.get('reward_cycle_start')
+    if reward_cycle_start:
+        reward_cycle_start = datetime.strptime(reward_cycle_start, '%Y-%m-%d %H:%M:%S')
+    else:
+        reward_cycle_start = datetime.now()
+
+    days_since_start = (datetime.now() - reward_cycle_start).days
+    if days_since_start >= REWARD_RESET_DAYS:
+        reward_cycle_start = datetime.now()
+        days_since_start = 0
+
+    reward_amount = DAILY_REWARD_INCREMENT * (days_since_start + 1)
+
+    send_ton_tokens(user['address'], reward_amount)
     set_last_claimed(user_id, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    update.message.reply_text(f'You have claimed your daily reward of {DAILY_REWARD_AMOUNT} TON tokens!')
+    set_reward_cycle(user_id, reward_cycle_start.strftime('%Y-%m-%d %H:%M:%S'))
+    update.message.reply_text(f'You have claimed your daily reward of {reward_amount} TON tokens!')
 
 def main():
     create_db()
